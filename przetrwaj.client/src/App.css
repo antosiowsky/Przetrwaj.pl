@@ -1,11 +1,166 @@
-﻿#root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
+﻿/* App.css */
+
+
+/* Podstawowe style */
+html, body {
+    height: 100%; /* Ustawiamy 100% wysokości dla całej strony */
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto'; /* Font obsługujący polskie znaki */
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Kontener aplikacji */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%; /* Cała wysokość */
+    justify-content: space-between; /* Zawartość będzie rozciągnięta na całą wysokość */
     text-align: center;
 }
 
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
+/* Nagłówek */
+.header {
+    background-color: #1c1c1c;
+    color: #ff9900;
+    padding: 20px 0;
+}
+
+    .header h1 {
+        font-size: 36px;
+    }
+
+/* Nawigacja */
+.nav button {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    width: 100%;
+    max-width: 150px; /* Limit szerokości przycisku */
+}
+
+    .nav button:hover {
+        background-color: #e65c00;
+    }
+
+/* Zawartość strony */
+.content {
+    flex: 1; /* Zajmuje całą dostępną przestrzeń */
+    margin-top: 20px;
+    padding: 20px;
+}
+
+/* Strona główna i formularz rejestracji */
+.main-page, .register-page {
+    padding: 20px;
+    background-color: #333333;
+    border: 1px solid #444444;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+/* Stopka */
+footer {
+    background-color: #1c1c1c;
+    color: white;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+    footer p {
+        margin: 0;
+    }
+
+/* Formularze */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #444444;
+    border-radius: 8px;
+    border: 1px solid #555555;
+}
+
+    form div {
+        margin: 10px 0;
+    }
+
+    form input {
+        padding: 8px;
+        border: 1px solid #555555;
+        border-radius: 4px;
+        background-color: #333333;
+        color: white;
+        width: 200px;
+    }
+
+    form button {
+        background-color: #ff6600;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+        border-radius: 4px;
+    }
+
+        form button:hover {
+            background-color: #e65c00;
+        }
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .nav button {
+        font-size: 14px;
+        padding: 8px 16px;
+        width: 100%;
+    }
+
+    .main-page, .register-page {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    form input {
+        width: 80%;
+    }
+
+    form button {
+        width: 80%;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .nav button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
+    .main-page, .register-page {
+        margin: 5px;
+        padding: 10px;
+    }
+
+    form input {
+        width: 90%;
+    }
+
+    form button {
+        width: 90%;
+    }
 }

@@ -1,51 +1,61 @@
+// src/App.jsx
 import { useEffect, useState } from 'react';
 import './App.css';
+import MainPage from './MainPage';
+import RegisterPage from './RegisterPage';
+import './index.css'; // Upewnij siê, ¿e masz tu poprawny CSS
 
-function App() {
-    const [forecasts, setForecasts] = useState();
+const App = () => {
+    const [currentPage, setCurrentPage] = useState('');
 
     useEffect(() => {
-        populateWeatherData();
+        const hash = window.location.hash || '#home';
+        if (hash === '#register') {
+            setCurrentPage('register');
+        } else {
+            setCurrentPage('home');
+        }
+
+        const handleHashChange = () => {
+            const newHash = window.location.hash;
+            if (newHash === '#register') {
+                setCurrentPage('register');
+            } else {
+                setCurrentPage('home');
+            }
+        };
+
+        window.addEventListener('hashchange', handleHashChange);
+
+        return () => {
+            window.removeEventListener('hashchange', handleHashChange);
+        };
     }, []);
 
-    const contents = forecasts === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-        : <table className="table table-striped" aria-labelledby="tableLabel">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Temp. (C)</th>
-                    <th>Temp. (F)</th>
-                    <th>Summary</th>
-                </tr>
-            </thead>
-            <tbody>
-                {forecasts.map(forecast =>
-                    <tr key={forecast.date}>
-                        <td>{forecast.date}</td>
-                        <td>{forecast.temperatureC}</td>
-                        <td>{forecast.temperatureF}</td>
-                        <td>{forecast.summary}</td>
-                    </tr>
-                )}
-            </tbody>
-        </table>;
-
     return (
-        <div>
-            <h1 id="tableLabel">Weather forecast</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-            {contents}
+        <div className="app-container">
+            <header className="header">
+                <h1>Global Disaster Alert and Coordination System</h1>
+                <nav className="nav">
+                    <button onClick={() => (window.location.hash = '#home')} className="btn btn-primary">
+                        Strona g³ówna
+                    </button>
+                    <button onClick={() => (window.location.hash = '#register')} className="btn btn-primary">
+                        Rejestracja / Logowanie
+                    </button>
+                </nav>
+            </header>
+
+            <section className="content">
+                {currentPage === 'home' && <MainPage />}
+                {currentPage === 'register' && <RegisterPage />}
+            </section>
+
+            <footer className="footer">
+                <p>&copy; 2025 GDACS. All rights reserved.</p>
+            </footer>
         </div>
     );
-    
-    async function populateWeatherData() {
-        const response = await fetch('weatherforecast');
-        if (response.ok) {
-            const data = await response.json();
-            setForecasts(data);
-        }
-    }
-}
+};
 
 export default App;
